@@ -3,11 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Responsive Login</title>
   <link rel="icon" href="image/logoTrue.png" type="image/jpg" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
-    #checkbox { display: none; }
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #000000ea;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #checkbox {
+      display: none;
+    }
 
     .switch {
       position: relative;
@@ -24,8 +43,13 @@
       box-shadow: 0 0 3px rgb(2,2,2) inset;
     }
 
-    .switch svg { width: 1.2em; }
-    .switch svg path { fill: rgb(48,48,48); }
+    .switch svg {
+      width: 1.2em;
+    }
+
+    .switch svg path {
+      fill: rgb(48,48,48);
+    }
 
     #checkbox:checked + .switch {
       box-shadow:
@@ -45,23 +69,6 @@
 
     #checkbox:checked + .switch svg path {
       fill: #fff;
-    }
-
-    * {
-      box-sizing: border-box;
-      user-select: none;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      background: #000000ea;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
     }
 
     #login-container {
@@ -120,7 +127,7 @@
     }
 
     .login-box input {
-      width: 320px;
+      width: 100%;
       height: 34.4px;
       padding: 8px;
       padding-right: 34px;
@@ -151,9 +158,11 @@
       pointer-events: none;
     }
 
-    video::-webkit-media-controls { display: none !important; }
-    video::-moz-media-controls    { display: none !important; }
-    video::-ms-media-controls     { display: none !important; }
+    video::-webkit-media-controls,
+    video::-moz-media-controls,
+    video::-ms-media-controls {
+      display: none !important;
+    }
 
     .bottom-menu {
       position: absolute;
@@ -189,6 +198,38 @@
     .bottom-menu .menu-item.language span {
       font-weight: bold;
     }
+
+    /* 🔽 Responsive for mobile */
+    @media (max-width: 480px) {
+      .login-box img {
+        width: 120px;
+        height: 120px;
+      }
+
+      .login-box .name {
+        font-size: 1.4rem;
+      }
+
+      .input-container {
+        width: 90%;
+      }
+
+      .switch {
+        width: 60px;
+        height: 60px;
+      }
+
+      .switch svg {
+        width: 1em;
+      }
+
+      .bottom-menu {
+        bottom: 20px;
+        right: 20px;
+        font-size: 0.7rem;
+        gap: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -199,11 +240,10 @@
     </svg>
   </label>
 
-  <!-- 🧊 Login Container -->
   <div id="login-container">
     <div class="login-box">
       <div class="login-content">
-        <img src="image/logoTrue.png" alt="" />
+        <img src="image/logoTrue.png" alt="Logo" />
         <p class="name">Student</p>
         <div class="input-container">
           <input type="text" placeholder="Student ID" />
@@ -213,7 +253,6 @@
     </div>
   </div>
 
-  <!-- เมนูมุมล่างขวา -->
   <div class="bottom-menu">
     <div class="menu-item language">
       <span>ENG</span>
@@ -233,10 +272,11 @@
     document.getElementById('checkbox').addEventListener('change', function(e) {
       if (e.target.checked) {
         setTimeout(function() {
-          var video = document.createElement('video');
+          const video = document.createElement('video');
           video.src = 'video/starting.mp4';
           video.autoplay = true;
-          video.removeAttribute('controls');
+          video.muted = true; // สำคัญสำหรับ autoplay มือถือ
+          video.playsInline = true;
           video.style.position = 'fixed';
           video.style.top = '0';
           video.style.left = '0';
@@ -245,24 +285,13 @@
           video.style.backgroundColor = 'black';
           video.style.objectFit = 'cover';
           video.style.zIndex = '9999';
-          video.setAttribute('playsinline', '');
-          video.setAttribute('webkit-playsinline', '');
           document.body.appendChild(video);
-
-          if (video.requestFullscreen) {
-            video.requestFullscreen();
-          } else if (video.webkitRequestFullscreen) {
-            video.webkitRequestFullscreen();
-          } else if (video.msRequestFullscreen) {
-            video.msRequestFullscreen();
-          }
 
           video.play();
 
           video.addEventListener('ended', function() {
             video.remove();
             document.getElementById('login-container').style.display = 'flex';
-            
             const bottomMenu = document.querySelector('.bottom-menu');
             bottomMenu.style.display = 'flex';
 
