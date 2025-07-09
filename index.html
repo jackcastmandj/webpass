@@ -3,193 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>WebPass</title>
   <link rel="icon" href="image/logoTrue.png" type="image/jpg" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    #checkbox { display: none; }
-
-    .switch {
-      position: relative;
-      width: 80px;
-      height: 80px;
-      background-color: rgb(99,99,99);
-      border-radius: 50%;
-      z-index: 1;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid rgb(126,126,126);
-      box-shadow: 0 0 3px rgb(2,2,2) inset;
-    }
-
-    .switch svg { width: 1.2em; }
-    .switch svg path { fill: rgb(48,48,48); }
-
-    #checkbox:checked + .switch {
-      box-shadow:
-        0 0 1px rgb(5,142,240) inset,
-        0 0 2px rgb(5,142,240) inset,
-        0 0 10px rgb(5,142,240) inset,
-        0 0 40px rgb(5,142,240),
-        0 0 100px rgb(5,142,240),
-        0 0 5px rgb(5,142,240);
-      border: 2px solid #fff;
-      background-color: rgb(146,180,184);
-    }
-
-    #checkbox:checked + .switch svg {
-      filter: drop-shadow(0 0 5px rgb(5,142,240));
-    }
-
-    #checkbox:checked + .switch svg path {
-      fill: #fff;
-    }
-
-    * {
-      box-sizing: border-box;
-      user-select: none;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      background: #000000ea;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    #login-container {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: url('image/back2.jpg') no-repeat center/cover;
-      backdrop-filter: blur(25px);
-      z-index: 9999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .login-box {
-      background: rgba(255,255,255,0.1);
-      width: 100vw; height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      backdrop-filter: blur(10px);
-      color: white;
-      text-align: center;
-    }
-
-    .login-content {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    .login-content.fade-in {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .login-box img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      margin-bottom: 0.5rem;
-    }
-
-    .login-box .name {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      text-shadow: 0 -1px 0.5px rgba(0,0,0,0.6);
-    }
-
-    .input-container {
-      position: relative;
-      width: 320px;
-    }
-
-    .login-box input {
-      width: 320px;
-      height: 34.4px;
-      padding: 8px;
-      padding-right: 34px;
-      font-size: .9rem;
-      background: #202020;
-      color: #fff;
-      border: none;
-      border-radius: 2px;
-    }
-
-    .login-box input:focus {
-      outline: none;
-      box-shadow: 0 2.2px 4px rgba(5,142,240);
-    }
-
-    .login-box input::placeholder {
-      color: #d4d3d3;
-      opacity: 1;
-    }
-
-    .arrow-icon {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #d4d3d3;
-      font-size: 1rem;
-      pointer-events: none;
-    }
-
-    video::-webkit-media-controls { display: none !important; }
-    video::-moz-media-controls    { display: none !important; }
-    video::-ms-media-controls     { display: none !important; }
-
-    .bottom-menu {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
-      display: flex;
-      opacity: 0;
-      transition: opacity 1s ease;
-      z-index: 10000;
-      gap: 2rem;
-      align-items: center;
-      color: rgba(255,255,255,0.8);
-      font-size: 0.8rem;
-      pointer-events: none;
-    }
-
-    .bottom-menu.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .bottom-menu .menu-item {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .bottom-menu .menu-item:hover {
-      color: #fff;
-    }
-
-    .bottom-menu .menu-item.language span {
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
   <input id="checkbox" type="checkbox" />
@@ -206,8 +23,14 @@
         <img src="image/logoTrue.png" alt="" />
         <p class="name">Student</p>
         <div class="input-container">
-          <input type="text" placeholder="Student ID" />
-          <i class="fas fa-arrow-right arrow-icon"></i>
+
+          <form id="login-form">
+            <input type="text" name="student_id" placeholder="Student ID" required />
+            <button type="submit" class="arrow-icon">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
+
         </div>
       </div>
     </div>
@@ -229,51 +52,8 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('checkbox').addEventListener('change', function(e) {
-      if (e.target.checked) {
-        setTimeout(function() {
-          var video = document.createElement('video');
-          video.src = 'video/starting.mp4';
-          video.autoplay = true;
-          video.removeAttribute('controls');
-          video.style.position = 'fixed';
-          video.style.top = '0';
-          video.style.left = '0';
-          video.style.width = '100vw';
-          video.style.height = '100vh';
-          video.style.backgroundColor = 'black';
-          video.style.objectFit = 'cover';
-          video.style.zIndex = '9999';
-          video.setAttribute('playsinline', '');
-          video.setAttribute('webkit-playsinline', '');
-          document.body.appendChild(video);
-
-          if (video.requestFullscreen) {
-            video.requestFullscreen();
-          } else if (video.webkitRequestFullscreen) {
-            video.webkitRequestFullscreen();
-          } else if (video.msRequestFullscreen) {
-            video.msRequestFullscreen();
-          }
-
-          video.play();
-
-          video.addEventListener('ended', function() {
-            video.remove();
-            document.getElementById('login-container').style.display = 'flex';
-            
-            const bottomMenu = document.querySelector('.bottom-menu');
-            bottomMenu.style.display = 'flex';
-
-            setTimeout(() => {
-              bottomMenu.classList.add('show');
-              document.querySelector('.login-content').classList.add('fade-in');
-            }, 100);
-          });
-        }, 2000);
-      }
-    });
-  </script>
+  <script src="/js/login.js"></script>
+  <script src="/js/noKey.js"></script>
+  <script src="/js/check.js"></script>
 </body>
 </html>
