@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>คำใบ้รับน้อง</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      font-family: 'Kanit', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    .hint-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      max-width: 600px;
+      width: 100%;
+    }
+    .hint {
+      padding: 10px;
+      background: #f8f9fa;
+      margin-top: 10px;
+      border-left: 5px solid #0d6efd;
+    }
+  </style>
+</head>
+<body>
+  <div class="hint-box">
+    <h2 class="text-center mb-4">🔐 คำใบ้กิจกรรมรับน้อง</h2>
+    <div id="hintList"></div>
+  </div>
+
+  <script>
+    const now = new Date();
+
+    const hints = [
+      "ชื่อฟังดูคล้ายภาษาอิตาลี",           // 9 ก.ค.
+      "สีเนียนตา มาจากการกระเจิงของแสงผ่านของเหลวหลายชั้น",               // 11 ก.ค.
+      "มักถูกวาดลวดลายด้วยแรงโน้มถ่วงและจังหวะมือ",             // 13 ก.ค.
+      "กำเนิดจากดินแดนรองเท้าบู๊ต",         // 15 ก.ค.
+      "รสชาตินุ่มแต่มีหัวใจที่เข้ม",              // 17 ก.ค.
+      "ชื่อเต็มในบ้านเกิดแปลว่า “น้ำนม”" // 19 ก.ค.
+    ];
+
+    // วันที่ปล่อยคำใบ้แบบกำหนดไว้ล่วงหน้า (เวลาเที่ยงตรง)
+    const releaseDates = [
+      new Date("2025-07-09T12:00:00"),
+      new Date("2025-07-11T12:00:00"),
+      new Date("2025-07-13T12:00:00"),
+      new Date("2025-07-15T12:00:00"),
+      new Date("2025-07-17T12:00:00"),
+      new Date("2025-07-19T12:00:00")
+    ];
+
+    const hintList = document.getElementById("hintList");
+    let shown = 0;
+
+    for (let i = 0; i < releaseDates.length; i++) {
+      if (now >= releaseDates[i]) {
+        hintList.innerHTML += `<div class="hint">${hints[i]}</div>`;
+        shown++;
+      }
+    }
+
+    if (shown === 0) {
+      hintList.innerHTML = "<p class='text-muted text-center'>📅 ยังไม่มีคำใบ้ในตอนนี้<br>รอก่อนอีกนิดนะ!</p>";
+    }
+  </script>
+  <script src="/js/noKey.js"></script>
+</body>
+</html>
+
+<!-- 68363381	พงค์พิพัฒน์ มาทำมา -->
